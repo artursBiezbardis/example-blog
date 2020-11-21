@@ -515,8 +515,8 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\codelex-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\codelex-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/biezais/PhpstormProjects/Codelex/Uzedevumi/example-blog/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/biezais/PhpstormProjects/Codelex/Uzedevumi/example-blog/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

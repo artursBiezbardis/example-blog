@@ -58,4 +58,25 @@ class ArticlesControllerTest extends TestCase
             'content' => $article->content
         ]);
     }
+
+    public function testEditArticle():void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $article = Article::factory()->create([
+            'user_id' => $user->id
+        ]);
+        $this->assertDatabaseHas('articles', [
+            'user_id' => $user->id,
+            'title' => $article->title,
+            'content' => $article->content
+        ]);
+        $this->followingRedirects();
+        $response = $this->set('articles.edit'), [
+            'title' => 'Example title',
+            'content' => 'Example content'
+        ]);
+
+    }
+
 }
