@@ -59,24 +59,85 @@ class ArticlesControllerTest extends TestCase
         ]);
     }
 
-    public function testEditArticle():void
+    public function testEditArticle(): void
+    {
+        $user = User::factory()->create();
+        $article = Article::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $this->followingRedirects();
+
+        $response = $this->get(route('articles.edit', $article));
+
+        $response->assertStatus(200);
+
+    }
+
+    public function testUpdateArticle()
     {
         $user = User::factory()->create();
         $this->actingAs($user);
         $article = Article::factory()->create([
             'user_id' => $user->id
         ]);
+
         $this->assertDatabaseHas('articles', [
             'user_id' => $user->id,
             'title' => $article->title,
             'content' => $article->content
         ]);
+
         $this->followingRedirects();
-        $response = $this->set('articles.edit'), [
+
+        $response = $this->put(route('articles.update',$article), [
             'title' => 'Example title',
             'content' => 'Example content'
         ]);
+        $response->assertStatus(200);
 
+        $this->assertDatabaseHas('articles', [
+            'user_id' => $user->id,
+            'title' => 'Example title',
+            'content' => 'Example content'
+        ]);
+    }
+    public function testShowArticle()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $article = Article::factory()->create([
+            'user_id' => $user->id
+        ]);
+
+        $this->followingRedirects();
+
+        $response = $this->get(route('articles.show', $article));
+
+        $response->assertStatus(200);
+    }
+
+
+    public function testArticlesIndex()
+    {
+        $user = User::factory()->create();
+
+        $this->actingAs($user);
+
+        $articles =[
+            Article::factory()->create([
+            'user_id' => $user->id]),
+            Article::factory()->create([
+                'user_id' => $user->id])
+            ];
+
+        $this->followingRedirects();
+
+        $response = $this->get(route('articles.index', $articles));
+
+        $response->assertStatus(200);
     }
 
 }
