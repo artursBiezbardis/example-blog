@@ -149,4 +149,21 @@ class ArticlesControllerTest extends TestCase
 
         $response->assertStatus(403);
     }
+
+    public function testCannotCreateMoreThan3Articles(): void
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+
+        Article::factory()->count(3)->create([
+            'user_id' => $user->id
+        ]);
+
+        $response = $this->post(route('articles.store'), [
+            'title' => 'Example title',
+            'content' => 'Example content'
+        ]);
+
+        $response->assertStatus(403);
+    }
 }

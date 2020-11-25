@@ -16,11 +16,15 @@ class ArticlesController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Article::class);
+
         return view('articles.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Article::class);
+
         $article = (new Article)->fill($request->all());
         $article->user()->associate(auth()->user());
         $article->save();
