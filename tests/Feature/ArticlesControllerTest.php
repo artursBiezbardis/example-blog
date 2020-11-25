@@ -78,7 +78,7 @@ class ArticlesControllerTest extends TestCase
         $response = $this->delete(route('articles.destroy', $article));
 
         $response->assertStatus(200);
-        $this->assertDatabaseMissing('articles', [
+        $this->assertSoftDeleted('articles', [
             'user_id' => $user->id,
             'title' => $article->title,
             'content' => $article->content
