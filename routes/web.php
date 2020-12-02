@@ -16,3 +16,5 @@ Route::resource('articles', 'ArticlesController')
 
 Route::get('articles', 'ArticlesController@index')->name('articles.index');
 Route::get('articles/{article}', 'ArticlesController@show')->name('articles.show');
+
+Route::get('/products/{product}','ProductsController@show');
