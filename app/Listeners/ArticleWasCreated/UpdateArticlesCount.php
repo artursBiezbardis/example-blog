@@ -6,12 +6,14 @@ use App\Events\ArticleWasCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class TestListener
+class UpdateArticlesCount
 {
     public function handle(ArticleWasCreated $event)
     {
-        $article = $event->article();
+        $user = $event->article()->user;
 
-        dd($article->toArray());
+        $user->update([
+            'articles_count' => $user->articles()->count()
+        ]);
     }
 }

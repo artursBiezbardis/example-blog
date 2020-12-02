@@ -30,6 +30,15 @@ class ArticlesControllerTest extends TestCase
             'title' => 'Example title',
             'content' => 'Example content'
         ]);
+
+        $this->assertDatabaseHas('users', [
+            'id' => $user->id,
+            'articles_count' => 1
+        ]);
+
+        var_dump($user->articles_count);
+
+        $this->assertEquals(1, $user->articles_count);
     }
 
     public function testUpdateExistingArticle(): void

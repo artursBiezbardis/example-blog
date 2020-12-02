@@ -3,8 +3,7 @@
 namespace App\Providers;
 
 use App\Events\ArticleWasCreated;
-use App\Listeners\ArticleWasCreated\Test2Listener;
-use App\Listeners\ArticleWasCreated\TestListener;
+use App\Listeners\ArticleWasCreated\UpdateArticlesCount;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -21,8 +20,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         ArticleWasCreated::class => [
-            TestListener::class,
-            Test2Listener::class,
+            UpdateArticlesCount::class
         ]
     ];
 
