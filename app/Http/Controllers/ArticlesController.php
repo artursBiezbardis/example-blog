@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\ArticleWasCreated;
+use App\Jobs\SuperCounterJob;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,8 @@ class ArticlesController extends Controller
         $article->save();
 
         event(new ArticleWasCreated($article));
+
+        dispatch(new SuperCounterJob());
 
         return redirect()->route('articles.index');
     }

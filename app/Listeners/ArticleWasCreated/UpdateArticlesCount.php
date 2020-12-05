@@ -6,8 +6,10 @@ use App\Events\ArticleWasCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UpdateArticlesCount
+class UpdateArticlesCount implements ShouldQueue
 {
+    use InteractsWithQueue;
+    
     public function handle(ArticleWasCreated $event)
     {
         $user = $event->article()->user;
