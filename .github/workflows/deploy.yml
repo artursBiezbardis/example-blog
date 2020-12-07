@@ -16,5 +16,5 @@ jobs:
         host: ${{ secrets.HOST }}
         user: ${{ secrets.USERNAME }}
         port: ${{ secrets.PORT }}
-        password: ${{ secrets.PASSWORD }}
+        pass: ${{ secrets.PASSWORD }}
         command: cd && ./deploy.sh >> deploy.log
