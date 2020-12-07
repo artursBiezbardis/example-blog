@@ -33,7 +33,7 @@ class ArticlesController extends Controller
 
         event(new ArticleWasCreated($article));
 
-        dispatch(new SuperCounterJob());
+        //dispatch(new SuperCounterJob());
 
         return redirect()->route('articles.index');
     }

@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         ArticleWasCreated::class => [
-            CounterListener::class,
+            //CounterListener::class,
             UpdateArticlesCount::class,
         ]
     ];

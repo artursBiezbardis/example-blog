@@ -36,9 +36,7 @@ class ArticlesControllerTest extends TestCase
             'articles_count' => 1
         ]);
 
-        var_dump($user->articles_count);
-
-        $this->assertEquals(1, $user->articles_count);
+        $this->assertEquals(1, $user->fresh()->articles_count);
     }
 
     public function testUpdateExistingArticle(): void
@@ -164,7 +162,7 @@ class ArticlesControllerTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        Article::factory()->count(3)->create([
+        Article::factory()->count(50)->create([
             'user_id' => $user->id
         ]);
 
