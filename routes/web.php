@@ -20,3 +20,6 @@ Route::get('articles/{article}', 'ArticlesController@show')->name('articles.show
 
 Route::get('/products/{product}','ProductsController@show');
 
+Route::get('/test', function () {
+    return 'IT WORKS!';
+});
