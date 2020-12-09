@@ -7,6 +7,16 @@ use App\Models\User;
 
 class ArticlePolicy
 {
+    public function viewAny(): bool
+    {
+        return true;
+    }
+
+    public function view(): bool
+    {
+        return true;
+    }
+
     public function create(User $user)
     {
         return $user->articles()->count() < 50;

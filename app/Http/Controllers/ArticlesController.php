@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Events\ArticleWasCreated;
-use App\Jobs\SuperCounterJob;
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Article::class, 'article');
+    }
+
     public function index()
     {
         return view('articles.index', [
@@ -18,14 +22,11 @@ class ArticlesController extends Controller
 
     public function create()
     {
-        $this->authorize('create', Article::class);
         return view('articles.create');
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        $this->authorize('create', Article::class);
-
         $article = (new Article)->fill($request->all());
         $article->user()->associate(auth()->user());
         $article->save();
@@ -49,10 +50,8 @@ class ArticlesController extends Controller
         ]);
     }
 
-    public function update(Request $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
-        $this->authorize('update', $article);
-
         $article->update($request->all());
 
         return redirect()->route('articles.edit', $article);
@@ -60,8 +59,6 @@ class ArticlesController extends Controller
 
     public function destroy(Article $article)
     {
-        $this->authorize('delete', $article);
-
         $article->delete();
 
         return redirect()->route('articles.index');
